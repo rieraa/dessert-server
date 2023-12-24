@@ -2,7 +2,7 @@ package com.example.desserts;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.example.desserts.service.IUserService;
+import com.example.desserts.service.UserService;
 import jakarta.annotation.Resource;
 import org.apache.ibatis.annotations.Mapper;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 class DessertsServerApplicationTests {
 
     @Resource
-    IUserService userService;
+    UserService userService;
 
     @Resource
     DataSource source;

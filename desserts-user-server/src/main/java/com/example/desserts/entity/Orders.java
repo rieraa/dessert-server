@@ -8,8 +8,6 @@ import java.math.BigDecimal;
  * 
  * </p>
  *
- * @author baomidou
- * @since 2023-12-24
  */
 public class Orders implements Serializable {
 

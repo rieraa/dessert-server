@@ -2,15 +2,13 @@ package com.example.desserts.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 
 /**
  * <p>
- * 
- * </p>
  *
- * @author baomidou
- * @since 2023-12-24
+ * </p>
  */
 public class User implements Serializable {
 
@@ -20,6 +18,7 @@ public class User implements Serializable {
     private Integer userId;
 
     private String password;
+
 
     private String userName;
 
@@ -90,13 +89,13 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-        "userId = " + userId +
-        ", password = " + password +
-        ", userName = " + userName +
-        ", userSex = " + userSex +
-        ", userAvatar = " + userAvatar +
-        ", delTag = " + delTag +
-        ", isAdmin = " + isAdmin +
-        "}";
+                "userId = " + userId +
+                ", password = " + password +
+                ", userName = " + userName +
+                ", userSex = " + userSex +
+                ", userAvatar = " + userAvatar +
+                ", delTag = " + delTag +
+                ", isAdmin = " + isAdmin +
+                "}";
     }
 }

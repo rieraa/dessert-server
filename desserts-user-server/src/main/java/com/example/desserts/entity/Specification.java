@@ -9,8 +9,6 @@ import java.io.Serializable;
  * 
  * </p>
  *
- * @author baomidou
- * @since 2023-12-24
  */
 public class Specification implements Serializable {
 

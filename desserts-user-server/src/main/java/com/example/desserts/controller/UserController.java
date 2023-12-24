@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
  *  前端控制器
  * </p>
  *
- * @author baomidou
- * @since 2023-12-24
  */
 @Controller
 @RequestMapping("/user")

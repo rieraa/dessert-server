@@ -7,8 +7,6 @@ import java.io.Serializable;
  * 
  * </p>
  *
- * @author baomidou
- * @since 2023-12-24
  */
 public class Cart implements Serializable {
 
