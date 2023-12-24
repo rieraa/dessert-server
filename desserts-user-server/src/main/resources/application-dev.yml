@@ -6,15 +6,6 @@ spring:
     username: dessert
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-#  mvc:
-#    static-path-pattern: /static/**
-#  security:
-#    user:
-#      name: 'admin'   #默认登录用户名
-#      password: '123456'   #默认登录密码
-#      roles: #默认用户的角色
-#        - admin
-#        - user
 
 mybatis-plus:
   configuration:
