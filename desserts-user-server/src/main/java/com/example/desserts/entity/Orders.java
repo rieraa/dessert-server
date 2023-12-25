@@ -1,5 +1,8 @@
 package com.example.desserts.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -12,6 +15,7 @@ import java.math.BigDecimal;
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @TableId(value = "order_id", type = IdType.AUTO)
 
     private Integer orderId;
 
