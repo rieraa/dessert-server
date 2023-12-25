@@ -5,7 +5,7 @@ package com.example.desserts.enums;
  */
 public enum BusinessCode {
     // 通用错误码
-    SUCCESS(2000, "操作成功成功"),
+    SUCCESS(2000, "操作成功"),
     SYSTEM_ERROR(1001, "系统错误"),
     PARAMS_ERROR(1002, "参数错误"),
     BUSINESS_ERROR(1003, "业务逻辑错误"),
@@ -22,15 +22,9 @@ public enum BusinessCode {
 
     // 商品相关错误码
     PRODUCT_NOT_FOUND(4001, "商品不存在"),
-    INSUFFICIENT_STOCK(4002, "库存不足"),
+    INSUFFICIENT_STOCK(4002, "库存不足");
 
-    // 订单相关错误码
-    ORDER_NOT_FOUND(5001, "订单不存在"),
-    ORDER_CANCELLED(5002, "订单已取消"),
-    ORDER_PAID(5003, "订单已支付"),
 
-    // 支付相关错误码
-    PAYMENT_FAILED(6001, "支付失败");
 
 
     private final int code;
