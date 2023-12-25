@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class ApplicationInitiator implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
-//        System.out.println("我是自定义执行！");
+        //System.out.println("我是自定义执行！");
     }
 }
