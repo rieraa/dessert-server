@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Data
 public class UserLoginRequest {
 
+    private Integer userId;
 
     private String userName;
 

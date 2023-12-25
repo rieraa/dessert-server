@@ -1,21 +1,25 @@
 package com.example.desserts.domain;
 
-import com.example.desserts.enums.HttpCodeEnum;
+import com.example.desserts.enums.BusinessCode;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 
-// JsonInclude 注解用于在 JSON 序列化时排除空字段
+/**
+ * 通用响应结果类，用于包装 API 接口返回的数据
+ *
+ * @param <T> 响应数据的类型
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseResult<T> implements Serializable {
-    private Integer code;
-    private String msg;
-    private T data;
+    private Integer code;  // 响应状态码
+    private String msg;    // 响应消息
+    private T data;        // 响应数据
 
     // 默认构造函数，使用默认的成功状态码和消息
     public ResponseResult() {
-        this.code = HttpCodeEnum.SUCCESS.getCode();
-        this.msg = HttpCodeEnum.SUCCESS.getMsg();
+        this.code = BusinessCode.SUCCESS.getCode();
+        this.msg = BusinessCode.SUCCESS.getMessage();
     }
 
     // 带有状态码和数据的构造函数
@@ -37,50 +41,63 @@ public class ResponseResult<T> implements Serializable {
         this.msg = msg;
     }
 
-    // 工厂方法，用于创建指定状态码和消息的错误 ResponseResult
-    public static ResponseResult errorResult(int code, String msg) {
-        ResponseResult result = new ResponseResult();
-        return result.error(code, msg);
-    }
 
-    // 工厂方法，用于创建默认成功的 ResponseResult
+    // 创建默认的成功ResponseResult
     public static ResponseResult okResult() {
         ResponseResult result = new ResponseResult();
         return result;
     }
 
-    // 工厂方法，用于创建指定状态码和消息的成功 ResponseResult
+    // 创建指定状态码和消息的成功ResponseResult
     public static ResponseResult okResult(int code, String msg) {
         ResponseResult result = new ResponseResult();
         return result.ok(code, null, msg);
     }
 
-    // 工厂方法，用于创建包含数据的成功 ResponseResult
+    // 创建指定指定数据ResponseResult
     public static ResponseResult okResult(Object data) {
-        ResponseResult result = setAppHttpCodeEnum(HttpCodeEnum.SUCCESS, HttpCodeEnum.SUCCESS.getMsg());
+        // 添加成功的默认编码和默认消息
+        ResponseResult result = setBusinessCodeMessage(BusinessCode.SUCCESS, BusinessCode.SUCCESS.getMessage());
         if (data != null) {
             result.setData(data);
         }
         return result;
     }
 
-    // 工厂方法，用于根据 HttpCodeEnum 创建错误 ResponseResult
-    public static ResponseResult errorResult(HttpCodeEnum enums) {
-        return setAppHttpCodeEnum(enums, enums.getMsg());
+    // 自定义数据及消息
+    public static ResponseResult okResult(BusinessCode enums, String msg, Object data) {
+        // 添加成功的默认编码和默认消息
+        ResponseResult result = setBusinessCodeMessage(enums, msg);
+        if (data != null) {
+            result.setData(data);
+        }
+        return result;
     }
 
-    // 工厂方法，用于根据 HttpCodeEnum 和自定义消息创建错误 ResponseResult
-    public static ResponseResult errorResult(HttpCodeEnum enums, String msg) {
-        return setAppHttpCodeEnum(enums, msg);
+    // 创建指定状态码和消息的错误 ResponseResult
+    public static ResponseResult errorResult(int code, String msg) {
+        ResponseResult result = new ResponseResult();
+        return result.error(code, msg);
     }
 
-    // 工具方法，用于设置 HttpCodeEnum 的成功 ResponseResult
-    public static ResponseResult setAppHttpCodeEnum(HttpCodeEnum enums) {
-        return okResult(enums.getCode(), enums.getMsg());
+
+    // 根据 BusinessCode 创建错误 ResponseResult
+    public static ResponseResult errorResult(BusinessCode enums) {
+        return setBusinessCodeMessage(enums, enums.getMessage());
     }
 
-    // 私有方法，用于设置包含自定义消息的 HttpCodeEnum 的成功 ResponseResult
-    private static ResponseResult setAppHttpCodeEnum(HttpCodeEnum enums, String msg) {
+    // 工厂方法，用于根据 BusinessCode 和自定义消息创建错误 ResponseResult
+    public static ResponseResult errorResult(BusinessCode enums, String msg) {
+        return setBusinessCodeMessage(enums, msg);
+    }
+
+    // 工具方法，用于设置 BusinessCode 的成功 ResponseResult
+    public static ResponseResult setBusinessCodeMessage(BusinessCode enums) {
+        return okResult(enums.getCode(), enums.getMessage());
+    }
+
+    // 私有方法，用于设置包含自定义消息的 BusinessCode 的成功 ResponseResult
+    private static ResponseResult setBusinessCodeMessage(BusinessCode enums, String msg) {
         return okResult(enums.getCode(), msg);
     }
 

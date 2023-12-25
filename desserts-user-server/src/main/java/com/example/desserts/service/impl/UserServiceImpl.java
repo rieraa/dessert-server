@@ -2,6 +2,8 @@ package com.example.desserts.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.desserts.entity.User;
+import com.example.desserts.enums.BusinessCode;
+import com.example.desserts.exception.BusinessException;
 import com.example.desserts.mapper.UserMapper;
 import com.example.desserts.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -35,38 +37,86 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         // 校验是否为空
         if (StringUtils.isAnyBlank(userName, password)) {
-            return null;
+            throw new BusinessException("参数错误", BusinessCode.PARAMS_ERROR.getCode(), "用户名或密码不能为空");
         }
 
-
         // 账户不能包含特殊字符
-        String validPaten = "[`~!@#$%^&*()+=|{}':;',\\\\\\\\[\\\\\\\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+        String validPaten = "[`~!@#$%^&*()+=|{}':;',\\\\[\\\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
         Matcher matcher = Pattern.compile(validPaten).matcher(userName);
         if (matcher.find()) {
-            return null;
+            throw new BusinessException("参数错误", BusinessCode.PARAMS_ERROR.getCode(), "用户名不能包含特殊字符");
         }
 
         // 2. 加密
-        String encryptPassword = DigestUtils.md5DigestAsHex((SALT + password).getBytes());// todo 注册功能
-
+        String encryptPassword = DigestUtils.md5DigestAsHex((SALT + password).getBytes());
 
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userName);
-        queryWrapper.eq("password", password);
+        queryWrapper.eq("password", encryptPassword);
         User user = userMapper.selectOne(queryWrapper);
-        //用户不存在
+
+        // 用户不存在
         if (user == null) {
             log.info("登录失败 用户名密码不匹配");
-            return null;
+            throw new BusinessException("登录失败", BusinessCode.USER_NOT_FOUND.getCode(), BusinessCode.USER_NOT_FOUND.getMessage());
         }
 
-        //3. 用户脱敏
-//        User safetyUser = getSafetyUser(user);
-        // 4. 记录用户的登录态
-        //session 将用户的数据存储在session会话中 将safetyUser存储在session中 名称为USER_LOGIN_STATE
-        //可以通过request.getSession().getAttribute()取出当前session的客户端数据 来分辨是哪位用户进行登录
-        //USER_LOGIN_STATE 的作用就是 若用户进行了登录操作 其session中就会存放对应的内容 若通过上方方法getAttribute时 若没有数据
-        //就能判断当前用户未登录
+
         return user;
+
+    }
+
+    @Override
+    public User userRegister(String userName, String password, String checkPassword) {
+        // 1.校验
+        if (StringUtils.isAnyBlank(userName, password, checkPassword)) {
+            throw new BusinessException("参数错误", BusinessCode.PARAMS_ERROR.getCode(), "用户名、密码不能为空");
+        }
+
+        if (userName.length() < 4) {
+            throw new BusinessException("参数错误", BusinessCode.PARAMS_ERROR.getCode(), "用户名长度不能小于4");
+        }
+        if (password.length() < 6 || checkPassword.length() < 6) {
+            throw new BusinessException("参数错误", BusinessCode.PARAMS_ERROR.getCode(), "密码长度不能小于6");
+        }
+
+        // 账户不能包含特殊字符
+        String validPaten = "[`~!@#$%^&*()+=|{}':;',\\\\[\\\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+        Matcher matcher = Pattern.compile(validPaten).matcher(userName);
+        if (matcher.find()) {
+            throw new BusinessException("参数错误", BusinessCode.PARAMS_ERROR.getCode(), "用户名不能包含特殊字符");
+        }
+
+
+        // 密码和校验密码相同
+        if (!password.equals(checkPassword)) {
+            throw new BusinessException("参数错误", BusinessCode.PARAMS_ERROR.getCode(), "两次密码不一致");
+        }
+
+        // 账户不能重复
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_name", userName);
+        long count = userMapper.selectCount(queryWrapper);
+        if (count > 0) {
+            throw new BusinessException("业务逻辑错误", BusinessCode.USERNAME_ALREADY_EXISTS.getCode(), BusinessCode.USERNAME_ALREADY_EXISTS.getMessage());
+        }
+
+        // 2.加密
+        String encryptPassword = DigestUtils.md5DigestAsHex((SALT + password).getBytes());
+
+        // 3.插入数据
+        User user = new User();
+        user.setUserName(userName);
+        user.setPassword(encryptPassword);
+
+
+        int saveResult = userMapper.insert(user);
+        if (saveResult <= 0) {
+            throw new BusinessException("业务逻辑错误", BusinessCode.BUSINESS_ERROR.getCode(), "用户注册失败");
+        }
+
+        queryWrapper.eq("user_id", user.getUserId());
+
+        return userMapper.selectOne(queryWrapper);
     }
 }
