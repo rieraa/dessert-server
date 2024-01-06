@@ -24,6 +24,16 @@ public class Specification implements Serializable {
 
     private Integer dessertId;
 
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
+    }
+
+    private String extra;
+
     public Integer getSpeId() {
         return speId;
     }
