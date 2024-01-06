@@ -1,7 +1,7 @@
 package com.example.desserts.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.desserts.entity.User;
+import com.example.desserts.model.entity.User;
 import com.example.desserts.enums.BusinessCode;
 import com.example.desserts.exception.BusinessException;
 import com.example.desserts.mapper.UserMapper;
@@ -57,7 +57,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         // 用户不存在
         if (user == null) {
-            log.info("登录失败 用户名密码不匹配");
             throw new BusinessException("登录失败", BusinessCode.USER_NOT_FOUND.getCode(), BusinessCode.USER_NOT_FOUND.getMessage());
         }
 

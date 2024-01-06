@@ -1,6 +1,6 @@
 package com.example.desserts.service.impl;
 
-import com.example.desserts.entity.Taste;
+import com.example.desserts.model.entity.Taste;
 import com.example.desserts.mapper.TasteMapper;
 import com.example.desserts.service.ITasteService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

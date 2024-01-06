@@ -1,6 +1,6 @@
 package com.example.desserts.service;
 
-import com.example.desserts.entity.Orderdetailet;
+import com.example.desserts.model.entity.Orderdetailet;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

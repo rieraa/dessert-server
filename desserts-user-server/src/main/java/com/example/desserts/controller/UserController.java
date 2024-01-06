@@ -3,9 +3,8 @@ package com.example.desserts.controller;
 import com.example.desserts.domain.ResponseResult;
 import com.example.desserts.domain.request.UserLoginRequest;
 import com.example.desserts.domain.request.UserRegisterRequest;
-import com.example.desserts.entity.User;
+import com.example.desserts.model.entity.User;
 import com.example.desserts.enums.BusinessCode;
-import com.example.desserts.exception.BusinessException;
 import com.example.desserts.service.UserService;
 import com.example.desserts.utils.JwtTokenUtils;
 import jakarta.annotation.Resource;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 // 可处理 HTTP 请求的控制器，并且能够返回数据给客户端
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
     @Resource

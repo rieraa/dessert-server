@@ -1,6 +1,6 @@
 package com.example.desserts.service.impl;
 
-import com.example.desserts.entity.DeliveryAddress;
+import com.example.desserts.model.entity.DeliveryAddress;
 import com.example.desserts.mapper.DeliveryAddressMapper;
 import com.example.desserts.service.IDeliveryAddressService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

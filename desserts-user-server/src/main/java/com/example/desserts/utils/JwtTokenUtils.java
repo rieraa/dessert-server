@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.desserts.entity.User;
+import com.example.desserts.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
