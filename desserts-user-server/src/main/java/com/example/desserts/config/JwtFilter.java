@@ -4,6 +4,7 @@ import com.auth0.jwt.interfaces.Claim;
 import com.example.desserts.utils.JwtTokenUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import jakarta.servlet.*;
@@ -12,15 +13,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Component
 @WebFilter(filterName = "JwtFilter", urlPatterns = "/*")
 public class JwtFilter implements Filter {
+
     private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
 
-    private static final String LOGIN_PATH = "/user/login";
-    private static final String REGISTER_PATH = "/user/register";
+    private static final Set<String> ALLOWED_PATHS = new HashSet<>(Arrays.asList("/user/login", "/user/register", "/dessert/getAllDessert"));
 
     private static final String NO_TOKEN_MESSAGE = "用户未登录";
     private static final String ILLEGAL_TOKEN_MESSAGE = "token失效";
@@ -39,8 +43,8 @@ public class JwtFilter implements Filter {
         final String token = request.getHeader("Authorization");
 
         String requestPath = request.getRequestURI();
-        // 登录接口，直接放行
-        if (requestPath.contains(LOGIN_PATH) || requestPath.contains(REGISTER_PATH)) {
+
+        if (ALLOWED_PATHS.stream().anyMatch(requestPath::contains)) {
             chain.doFilter(request, response);
             return;
         }
