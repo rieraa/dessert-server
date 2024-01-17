@@ -18,7 +18,7 @@ public enum BusinessCode {
     // 认证和授权错误码
     UNAUTHORIZED(3001, "未经授权"),
     TOKEN_EXPIRED(3002, "Token已过期"),
-    INVALID_TOKEN(3003, "无效的Token"),
+    USER_NOT_LOGIN(3003, "用户未登录"),
 
     // 商品相关错误码
     PRODUCT_NOT_FOUND(4001, "商品不存在"),
