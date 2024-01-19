@@ -9,7 +9,7 @@ import java.util.List;
  *
  */
 @Data
-public class DessertListDTO implements Serializable {
+public class DessertListVO implements Serializable {
 
     /**
      * 甜品列表

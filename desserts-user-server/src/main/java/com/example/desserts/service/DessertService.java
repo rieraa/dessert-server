@@ -1,6 +1,6 @@
 package com.example.desserts.service;
 
-import com.example.desserts.model.dto.DessertListDTO;
+import com.example.desserts.model.dto.DessertListVO;
 import com.example.desserts.model.entity.Dessert;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -11,5 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  *
  */
 public interface DessertService extends IService<Dessert> {
-    DessertListDTO getDessertList(Integer pageNum, Integer pageSize);
+    DessertListVO getDessertList(Integer pageNum, Integer pageSize);
 }

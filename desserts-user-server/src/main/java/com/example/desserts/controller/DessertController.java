@@ -2,11 +2,10 @@ package com.example.desserts.controller;
 
 import com.example.desserts.domain.ResponseResult;
 import com.example.desserts.enums.BusinessCode;
-import com.example.desserts.model.dto.DessertListDTO;
+import com.example.desserts.model.dto.DessertListVO;
 import com.example.desserts.service.DessertService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +38,7 @@ public class DessertController {
                                             @RequestParam(value = "pageSize", required = false, defaultValue = "15") int pageSize) {
 
         // 调用DessertService中的方法获取甜品列表
-        DessertListDTO dessertList = dessertService.getDessertList(page, pageSize);
+        DessertListVO dessertList = dessertService.getDessertList(page, pageSize);
 
         return ResponseResult.okResult(BusinessCode.SUCCESS, "成功", dessertList);
     }

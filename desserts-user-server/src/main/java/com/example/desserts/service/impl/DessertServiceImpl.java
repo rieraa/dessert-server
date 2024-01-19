@@ -3,10 +3,9 @@ package com.example.desserts.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.desserts.mapper.DessertMapper;
-import com.example.desserts.model.dto.DessertListDTO;
+import com.example.desserts.model.dto.DessertListVO;
 import com.example.desserts.model.entity.Dessert;
 import com.example.desserts.service.DessertService;
-import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,9 +20,9 @@ public class DessertServiceImpl extends ServiceImpl<DessertMapper, Dessert> impl
 
 
     @Override
-    public DessertListDTO getDessertList(Integer pageNum, Integer pageSize) {
-        // 创建一个 DessertListDTO 对象
-        DessertListDTO result = new DessertListDTO();
+    public DessertListVO getDessertList(Integer pageNum, Integer pageSize) {
+        // 创建一个 DessertListVO 对象
+        DessertListVO result = new DessertListVO();
 
         // 查询第 pageNum 页数据，每页 pageSize 条
         Page<Dessert> page = new Page<>(pageNum, pageSize);
@@ -38,7 +37,7 @@ public class DessertServiceImpl extends ServiceImpl<DessertMapper, Dessert> impl
         List<Dessert> list = page.getRecords();
         System.out.println("当前页数据：" + list);
 
-        // 将查询结果设置到 DessertListDTO 对象中
+        // 将查询结果设置到 DessertListVO 对象中
         result.setDesserts(list);
 
         // 判断是否还有更多数据
