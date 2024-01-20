@@ -2,7 +2,10 @@ package com.example.desserts.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
+import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -11,9 +14,12 @@ import java.io.Serializable;
  * </p>
  *
  */
+@Data
 public class Cart implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
+    @Setter
     @TableId(value = "custom_id", type = IdType.AUTO)
 
     private Integer cartId;
@@ -24,37 +30,11 @@ public class Cart implements Serializable {
 
     private Integer quantity;
 
-    public Integer getCartId() {
-        return cartId;
-    }
 
-    public void setCartId(Integer cartId) {
-        this.cartId = cartId;
-    }
+    private Integer speId;
 
-    public Integer getDessertId() {
-        return dessertId;
-    }
 
-    public void setDessertId(Integer dessertId) {
-        this.dessertId = dessertId;
-    }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
 
     @Override
     public String toString() {
@@ -63,6 +43,7 @@ public class Cart implements Serializable {
         ", dessertId = " + dessertId +
         ", userId = " + userId +
         ", quantity = " + quantity +
+        ", speId = " + speId +
         "}";
     }
 }
