@@ -3,7 +3,7 @@ package com.example.desserts.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.desserts.mapper.DessertMapper;
-import com.example.desserts.model.dto.DessertListVO;
+import com.example.desserts.model.vo.DessertListVO;
 import com.example.desserts.model.entity.Dessert;
 import com.example.desserts.service.DessertService;
 import org.springframework.stereotype.Service;

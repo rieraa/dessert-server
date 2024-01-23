@@ -2,7 +2,7 @@ package com.example.desserts.controller;
 
 import com.example.desserts.domain.ResponseResult;
 import com.example.desserts.enums.BusinessCode;
-import com.example.desserts.model.dto.DessertListVO;
+import com.example.desserts.model.vo.DessertListVO;
 import com.example.desserts.service.DessertService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;

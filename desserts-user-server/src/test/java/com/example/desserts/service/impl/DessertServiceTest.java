@@ -1,6 +1,6 @@
 package com.example.desserts.service.impl;
 
-import com.example.desserts.model.dto.DessertListVO;
+import com.example.desserts.model.vo.DessertListVO;
 import com.example.desserts.service.DessertService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

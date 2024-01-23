@@ -1,6 +1,6 @@
 package com.example.desserts.service;
 
-import com.example.desserts.model.dto.DessertListVO;
+import com.example.desserts.model.vo.DessertListVO;
 import com.example.desserts.model.entity.Dessert;
 import com.baomidou.mybatisplus.extension.service.IService;
 

@@ -1,4 +1,4 @@
-package com.example.desserts.model.dto;
+package com.example.desserts.model.vo;
 import com.example.desserts.model.entity.Dessert;
 import lombok.Data;
 import java.io.Serializable;
