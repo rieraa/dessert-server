@@ -26,14 +26,6 @@ public interface CartMapper extends BaseMapper<Cart> {
             "JOIN dessert d ON c.dessert_id = d.dessert_id " +
             "LEFT JOIN specification s ON c.spe_id = s.spe_id " +
             "WHERE c.user_id = #{userId}")
-    @Results({
-            @Result(property = "userId", column = "user_id"),
-            @Result(property = "cartId", column = "cart_id"),
-            @Result(property = "dessertId", column = "dessert_id"),
-            @Result(property = "dessertName", column = "dessert_name"),
-            @Result(property = "dessertPrice", column = "dessert_price"),
-            @Result(property = "specificationName", column = "specification_name")
-    })
     List<CartListVo> selectCartGoodsByUserId(Integer userId);
 
 }

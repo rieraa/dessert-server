@@ -18,9 +18,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
 
     @Override
     public List<CartListVo> getCartList(Integer userId) {
-        // 调用 mapper 查询购物车商品数据
 
-        // 返回查询结果
         return cartMapper.selectCartGoodsByUserId(userId);
     }
 }
