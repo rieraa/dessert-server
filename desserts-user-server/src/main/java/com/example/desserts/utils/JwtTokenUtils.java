@@ -16,7 +16,9 @@ public class JwtTokenUtils {
     // Token私钥
     private static final String TOKEN_SECRET = "secret";
     // Token过期时长，单位为秒
-    private static final long TOKEN_EXPIRE_TIME_SECONDS = 1800L;
+    //private static final long TOKEN_EXPIRE_TIME_SECONDS = 1800L;//30分钟
+    private static final long TOKEN_EXPIRE_TIME_SECONDS = 2592000L;// 30天
+
 
     /**
      * 生成用户token,设置token超时时间
