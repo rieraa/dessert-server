@@ -78,7 +78,7 @@ public class JwtFilter implements Filter {
     private void performAuthorization(HttpServletRequest request, HttpServletResponse response,
                                       String token, FilterChain chain) throws IOException, ServletException {
         // 如果token为空，返回用户未登录信息
-        if (Objects.equals(token, "")) {
+        if (Objects.equals(token, null) || Objects.equals(token, "")) {
             String jsonResponse = new ObjectMapper().writeValueAsString(ResponseResult.errorResult(BusinessCode.USER_NOT_LOGIN));
             response.setContentType("application/json");
             response.getWriter().write(jsonResponse);
