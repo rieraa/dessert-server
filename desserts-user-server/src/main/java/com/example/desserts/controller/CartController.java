@@ -21,8 +21,8 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @GetMapping("/getAllCart")
-    public ResponseResult getAllCart(HttpServletRequest request) {
+    @GetMapping("/getCartList")
+    public ResponseResult getCartList(HttpServletRequest request) {
         int userId = UserIdExtractor.extractUserIdFromRequest(request);
         return ResponseResult.okResult(cartService.getCartList(userId));
     }
