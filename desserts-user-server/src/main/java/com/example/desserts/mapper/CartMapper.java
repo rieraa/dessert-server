@@ -2,10 +2,8 @@ package com.example.desserts.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.desserts.model.entity.Cart;
-import com.example.desserts.model.vo.CartListVo;
+import com.example.desserts.model.vo.CartListVO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -26,6 +24,6 @@ public interface CartMapper extends BaseMapper<Cart> {
             "JOIN dessert d ON c.dessert_id = d.dessert_id " +
             "LEFT JOIN specification s ON c.spe_id = s.spe_id " +
             "WHERE c.user_id = #{userId}")
-    List<CartListVo> selectCartGoodsByUserId(Integer userId);
+    List<CartListVO> selectCartGoodsByUserId(Integer userId);
 
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class CartListVo {
+public class CartListVO {
 
 
     private Integer userId;

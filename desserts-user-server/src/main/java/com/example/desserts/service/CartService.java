@@ -2,7 +2,7 @@ package com.example.desserts.service;
 
 import com.example.desserts.model.entity.Cart;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.desserts.model.vo.CartListVo;
+import com.example.desserts.model.vo.CartListVO;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface CartService extends IService<Cart> {
 
-    List<CartListVo> getCartList(Integer userId);
+    List<CartListVO> getCartList(Integer userId);
 
 
 
