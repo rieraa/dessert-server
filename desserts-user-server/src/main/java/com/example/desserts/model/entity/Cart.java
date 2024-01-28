@@ -27,6 +27,8 @@ public class Cart implements Serializable {
 
     private Integer speId;
 
+    private Integer tasteId;
+
 
 
 
@@ -38,6 +40,7 @@ public class Cart implements Serializable {
         ", userId = " + userId +
         ", quantity = " + quantity +
         ", speId = " + speId +
+                ", tasteId = " + tasteId +
         "}";
     }
 }
