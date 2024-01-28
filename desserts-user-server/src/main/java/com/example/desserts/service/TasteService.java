@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  */
-public interface ITasteService extends IService<Taste> {
+public interface TasteService extends IService<Taste> {
 
 }

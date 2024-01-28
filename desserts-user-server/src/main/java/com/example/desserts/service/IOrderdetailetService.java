@@ -1,6 +1,6 @@
 package com.example.desserts.service;
 
-import com.example.desserts.model.entity.Orderdetailet;
+import com.example.desserts.model.entity.OrderDetail;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  */
-public interface IOrderdetailetService extends IService<Orderdetailet> {
+public interface IOrderdetailetService extends IService<OrderDetail> {
 
 }

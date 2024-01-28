@@ -23,4 +23,13 @@ public class DessertServiceTest {
         // 这里可以根据你的业务逻辑和期望的结果进行断言
         // 例如，你可以检查返回的 DessertListVO 是否包含了正确的数据，总记录数是否正确等等
     }
+
+    @Test
+    public void testDessertId() {
+        Integer dessertId = 1;
+
+        // 调用服务方法
+        dessertService.getDessertDetail(dessertId);
+
+    }
 }

@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  */
-public interface ISpecificationService extends IService<Specification> {
+public interface SpecificationService extends IService<Specification> {
 
 }

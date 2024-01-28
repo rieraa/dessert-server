@@ -3,20 +3,31 @@ package com.example.desserts.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.desserts.mapper.DessertMapper;
-import com.example.desserts.model.vo.DessertListVO;
+import com.example.desserts.mapper.SpecificationMapper;
+import com.example.desserts.mapper.TasteMapper;
 import com.example.desserts.model.entity.Dessert;
+import com.example.desserts.model.entity.Specification;
+import com.example.desserts.model.entity.Taste;
+import com.example.desserts.model.vo.DessertDetailVO;
+import com.example.desserts.model.vo.DessertListVO;
 import com.example.desserts.service.DessertService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * <p>
- * 服务实现类
- * </p>
+ * 甜品相关服务实现类
  */
 @Service
 public class DessertServiceImpl extends ServiceImpl<DessertMapper, Dessert> implements DessertService {
+
+    @Resource
+    DessertMapper dessertMapper;
+    @Resource
+    SpecificationMapper specificationMapper;
+    @Resource
+    TasteMapper tasteMapper;
 
 
     @Override
@@ -45,5 +56,19 @@ public class DessertServiceImpl extends ServiceImpl<DessertMapper, Dessert> impl
 
         return result;
     }
+
+    @Override
+    public DessertDetailVO getDessertDetail(Integer dessertId) {
+
+        DessertDetailVO dessertDetailVO = new DessertDetailVO();
+        dessertDetailVO = dessertMapper.selectDetailById(dessertId);
+        // 查询甜品规格及口味列表
+        List<Specification> specificationList = specificationMapper.selectByDessertId(dessertId);
+        List<Taste> tasteList = tasteMapper.selectByDessertId(dessertId);
+        dessertDetailVO.setTasteList(tasteList);
+        dessertDetailVO.setSpecificationList(specificationList);
+        return dessertDetailVO;
+    }
+
 
 }
