@@ -10,7 +10,7 @@ import java.io.Serializable;
  * </p>
  *
  */
-public class Orderdetailet implements Serializable {
+public class OrderDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -57,7 +57,7 @@ public class Orderdetailet implements Serializable {
 
     @Override
     public String toString() {
-        return "Orderdetailet{" +
+        return "OrderDetail{" +
         "odId = " + odId +
         ", orderId = " + orderId +
         ", dessertId = " + dessertId +
