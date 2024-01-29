@@ -19,10 +19,11 @@ public interface CartMapper extends BaseMapper<Cart> {
      * @param userId
      * @return
      */
-    @Select("SELECT c.user_id, c.cart_id, d.dessert_id, d.dessert_name, d.dessert_price, s.spe_name AS specification_name " +
+    @Select("SELECT c.user_id, c.cart_id, d.dessert_id, d.dessert_name, d.dessert_price, s.spe_name , t.taste_name " +
             "FROM cart c " +
             "JOIN dessert d ON c.dessert_id = d.dessert_id " +
             "LEFT JOIN specification s ON c.spe_id = s.spe_id " +
+            "LEFT JOIN taste t ON c.taste_id = t.taste_id " +  // 添加这里的空格
             "WHERE c.user_id = #{userId}")
     List<CartListVO> selectCartGoodsByUserId(Integer userId);
 

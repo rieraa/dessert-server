@@ -13,7 +13,8 @@ public class CartListVO {
     private Integer dessertId;
     private String dessertName;
     private BigDecimal dessertPrice;
-    private String specificationName;
+    private String speName;
+    private String tasteName;
 
 
 }
