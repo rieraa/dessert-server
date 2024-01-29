@@ -1,15 +1,14 @@
 package com.example.desserts.controller;
 
 import com.example.desserts.domain.ResponseResult;
-import com.example.desserts.domain.request.UserLoginRequest;
-import com.example.desserts.domain.request.UserRegisterRequest;
+import com.example.desserts.domain.DTO.UserLoginDTO;
+import com.example.desserts.domain.DTO.UserRegisterDTO;
 import com.example.desserts.model.entity.User;
 import com.example.desserts.enums.BusinessCode;
 import com.example.desserts.service.UserService;
 import com.example.desserts.utils.JwtTokenUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -25,7 +24,7 @@ public class UserController {
 
 
     @PostMapping("/register")
-    ResponseResult register(@RequestBody UserRegisterRequest userRegisterRequest) {
+    ResponseResult register(@RequestBody UserRegisterDTO userRegisterRequest) {
 
         String userName = userRegisterRequest.getUserName();
         String password = userRegisterRequest.getPassword();
@@ -44,7 +43,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/login")
-    ResponseResult<UserLoginRequest> login(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
+    ResponseResult<UserLoginDTO> login(@RequestBody UserLoginDTO userLoginRequest, HttpServletRequest request) {
         User user = new User();
         String userName = userLoginRequest.getUserName();
         String password = userLoginRequest.getPassword();
