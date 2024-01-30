@@ -16,14 +16,14 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.*;
 
+import static com.example.desserts.config.AllowedPaths.ALLOWED_PATHS;
+
 @Component
 @WebFilter(filterName = "JwtFilter", urlPatterns = "/*")
 public class JwtFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
 
-    // 设置允许直接访问的路径
-    private static final Set<String> ALLOWED_PATHS = new HashSet<>(Arrays.asList("/user/login", "/user/register", "/dessert/getAllDessert"));
 
     private static final String NO_TOKEN_MESSAGE = "用户未登录";
     private static final String ILLEGAL_TOKEN_MESSAGE = "token失效";
