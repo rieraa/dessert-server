@@ -14,13 +14,13 @@ public class Cart implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "custom_id", type = IdType.AUTO)
+    @TableId(value = "cart_id", type = IdType.AUTO)
 
     private Integer cartId;
 
     private Integer dessertId;
 
-    private String userId;
+    private Integer userId;
 
     private Integer quantity;
 
