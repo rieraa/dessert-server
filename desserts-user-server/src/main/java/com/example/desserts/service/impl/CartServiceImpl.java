@@ -34,6 +34,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
         updateWrapper.setSql("quantity = quantity + " + cart.getQuantity());
 
         int update = cartMapper.update(null, updateWrapper);
+        System.out.println("🚀 ~ file:CartServiceImpl.java method:addCart line:37 -----update:" + update);
         if (update == 0) { // 如果没有更新到任何记录，那么插入新的记录
             cart.setUserId(UserId);
             return cartMapper.insert(cart);
