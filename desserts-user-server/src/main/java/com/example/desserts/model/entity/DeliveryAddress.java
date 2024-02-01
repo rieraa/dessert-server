@@ -2,6 +2,8 @@ package com.example.desserts.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -11,11 +13,13 @@ import java.io.Serializable;
  * </p>
  *
  */
+@Data
+@TableName("deliveryAddress")
 public class DeliveryAddress implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @TableId(value = "da_id", type = IdType.AUTO)
 
+    @TableId(value = "da_id", type = IdType.AUTO)
     private Integer daId;
 
     private String contactName;
@@ -26,55 +30,9 @@ public class DeliveryAddress implements Serializable {
 
     private String address;
 
-    private String userId;
+    private Integer userId;
 
-    public Integer getDaId() {
-        return daId;
-    }
 
-    public void setDaId(Integer daId) {
-        this.daId = daId;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
-
-    public Integer getContactSex() {
-        return contactSex;
-    }
-
-    public void setContactSex(Integer contactSex) {
-        this.contactSex = contactSex;
-    }
-
-    public String getContactTel() {
-        return contactTel;
-    }
-
-    public void setContactTel(String contactTel) {
-        this.contactTel = contactTel;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     @Override
     public String toString() {

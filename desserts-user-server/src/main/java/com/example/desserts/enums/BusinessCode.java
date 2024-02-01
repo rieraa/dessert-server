@@ -23,7 +23,15 @@ public enum BusinessCode {
 
     // 商品相关错误码
     DESSERT_ADD_ERROR(4001, "购物车添加失败"),
-    INSUFFICIENT_STOCK(4002, "库存不足");
+    INSUFFICIENT_STOCK(4002, "库存不足"),
+
+    // 地址相关错误码
+    ADDRESS_ADD_ERROR(5001, "地址添加失败"),
+    ADDRESS_UPDATE_ERROR(5002, "地址更新失败"),
+
+    ADDRESS_DELETE_ERROR(5003, "地址删除失败"),
+
+    ADDRESS_SELECT_ERROR(5004, "地址查询失败");
 
 
 
