@@ -24,7 +24,6 @@ public class Cart implements Serializable {
 
     private Integer quantity;
 
-
     private Integer speId;
 
     private Integer tasteId;

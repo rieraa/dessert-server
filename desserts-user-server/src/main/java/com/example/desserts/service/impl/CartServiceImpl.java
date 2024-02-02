@@ -1,6 +1,5 @@
 package com.example.desserts.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.desserts.mapper.CartMapper;
@@ -40,6 +39,11 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
             return cartMapper.insert(cart);
         }
         return update;
+    }
+
+    @Override
+    public int deleteCart(Integer cartId) {
+        return cartMapper.deleteById(cartId);
     }
 
 }

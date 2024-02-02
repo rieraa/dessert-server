@@ -5,8 +5,8 @@ import com.example.desserts.enums.BusinessCode;
 import com.example.desserts.model.entity.Cart;
 import com.example.desserts.service.CartService;
 import com.example.desserts.utils.UserIdExtractor;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/cart")
 public class CartController {
 
-    private final CartService cartService;
+    @Resource
+    private CartService cartService;
 
-    @Autowired
-    public CartController(CartService cartService) {
-        this.cartService = cartService;
-    }
 
     @GetMapping("/getCartList")
     public ResponseResult getCartList(HttpServletRequest request) {
@@ -32,6 +29,16 @@ public class CartController {
         int userId = UserIdExtractor.extractUserIdFromRequest(request);
         if (cartService.addCart(cart, userId) == 1)
             return ResponseResult.okResult();
-        return ResponseResult.errorResult(BusinessCode.DESSERT_ADD_ERROR);
+        return ResponseResult.errorResult(BusinessCode.CART_ADD_ERROR);
+    }
+
+    @PostMapping("/deleteCart")
+    public ResponseResult deleteCart(@RequestBody Cart cart) {
+        if (cartService.deleteCart(cart.getCartId()) == 1)
+            return ResponseResult.okResult();
+        else if (cartService.deleteCart(cart.getCartId()) == 0)
+            return ResponseResult.errorResult(BusinessCode.CART_NOT_EXIST);
+        else
+            return ResponseResult.errorResult(BusinessCode.CART_DELETE_ERROR);
     }
 }

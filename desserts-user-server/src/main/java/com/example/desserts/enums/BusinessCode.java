@@ -22,8 +22,10 @@ public enum BusinessCode {
     TOKEN_INVALID(3004, "无效的Token"),
 
     // 商品相关错误码
-    DESSERT_ADD_ERROR(4001, "购物车添加失败"),
-    INSUFFICIENT_STOCK(4002, "库存不足"),
+    CART_ADD_ERROR(4001, "购物车添加失败"),
+    CART_DELETE_ERROR(4002, "购物车删除失败"),
+    CART_NOT_EXIST(4003, "当前购物车记录不存在"),
+
 
     // 地址相关错误码
     ADDRESS_ADD_ERROR(5001, "地址添加失败"),

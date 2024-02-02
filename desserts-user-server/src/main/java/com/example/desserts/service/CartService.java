@@ -1,7 +1,6 @@
 package com.example.desserts.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.desserts.domain.DTO.AddCartDTO;
 import com.example.desserts.model.entity.Cart;
 import com.example.desserts.model.vo.CartListVO;
 
@@ -19,6 +18,8 @@ public interface CartService extends IService<Cart> {
 
 
     int addCart(Cart cart,int UserId);
+
+    int deleteCart(Integer cartId);
 
 
 
