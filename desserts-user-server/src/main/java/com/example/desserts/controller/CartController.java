@@ -32,11 +32,12 @@ public class CartController {
         return ResponseResult.errorResult(BusinessCode.CART_ADD_ERROR);
     }
 
-    @PostMapping("/deleteCart")
+    @DeleteMapping("/deleteCart")
     public ResponseResult deleteCart(@RequestBody Cart cart) {
-        if (cartService.deleteCart(cart.getCartId()) == 1)
+        int result = cartService.deleteCart(cart.getCartId());
+        if (result == 1)
             return ResponseResult.okResult();
-        else if (cartService.deleteCart(cart.getCartId()) == 0)
+        else if (result == 0)
             return ResponseResult.errorResult(BusinessCode.CART_NOT_EXIST);
         else
             return ResponseResult.errorResult(BusinessCode.CART_DELETE_ERROR);
