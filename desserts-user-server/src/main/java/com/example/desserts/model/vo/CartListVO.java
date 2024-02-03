@@ -11,6 +11,7 @@ public class CartListVO {
     private Integer userId;
     private Integer cartId;
     private Integer dessertId;
+    private Integer quantity;
     private String dessertName;
     private BigDecimal unitPrice;
     private String speName;
