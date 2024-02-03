@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 
 @Data
@@ -28,6 +29,7 @@ public class Cart implements Serializable {
 
     private Integer tasteId;
 
+    private BigDecimal unitPrice;
 
 
 
