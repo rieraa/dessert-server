@@ -1,21 +1,14 @@
 package com.example.desserts.model.vo;
 
+import com.example.desserts.model.entity.Cart;
 import lombok.Data;
-
-import java.math.BigDecimal;
-
+import lombok.EqualsAndHashCode;
 @Data
-public class CartListVO {
+@EqualsAndHashCode(callSuper = true)
+public class CartListVO extends Cart {
 
-
-    private Integer userId;
-    private Integer cartId;
-    private Integer dessertId;
-    private Integer quantity;
     private String dessertName;
-    private BigDecimal unitPrice;
     private String speName;
     private String tasteName;
-
 
 }
