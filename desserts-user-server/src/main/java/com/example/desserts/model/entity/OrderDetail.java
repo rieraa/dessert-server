@@ -2,14 +2,16 @@ package com.example.desserts.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
- * <p>
- * 
- * </p>
  *
  */
+@Data
+@TableName("orderDetail")
 public class OrderDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,45 +25,8 @@ public class OrderDetail implements Serializable {
 
     private Integer quantity;
 
-    public Integer getOdId() {
-        return odId;
-    }
+    private Integer speId;
 
-    public void setOdId(Integer odId) {
-        this.odId = odId;
-    }
+    private Integer tasteId;
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getDessertId() {
-        return dessertId;
-    }
-
-    public void setDessertId(Integer dessertId) {
-        this.dessertId = dessertId;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return "OrderDetail{" +
-        "odId = " + odId +
-        ", orderId = " + orderId +
-        ", dessertId = " + dessertId +
-        ", quantity = " + quantity +
-        "}";
-    }
 }

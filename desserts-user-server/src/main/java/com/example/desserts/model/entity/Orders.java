@@ -2,16 +2,15 @@ package com.example.desserts.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * <p>
- * 
- * </p>
  *
  */
+@Data
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,7 +18,7 @@ public class Orders implements Serializable {
 
     private Integer orderId;
 
-    private String userId;
+    private Integer userId;
 
     private String orderDate;
 
@@ -29,53 +28,6 @@ public class Orders implements Serializable {
 
     private String remarks;
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public BigDecimal getOrderTotal() {
-        return orderTotal;
-    }
-
-    public void setOrderTotal(BigDecimal orderTotal) {
-        this.orderTotal = orderTotal;
-    }
-
-    public Integer getDaId() {
-        return daId;
-    }
-
-    public void setDaId(Integer daId) {
-        this.daId = daId;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
 
     @Override
     public String toString() {

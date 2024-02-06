@@ -1,7 +1,7 @@
 package com.example.desserts.mapper;
 
-import com.example.desserts.model.entity.Orders;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.desserts.model.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
