@@ -16,5 +16,7 @@ public class UserLoginDTO {
 
     private String token;
 
+    private Integer isAdmin;
+
 
 }

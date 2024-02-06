@@ -38,26 +38,27 @@ public class UserController {
     }
 
     /**
-     * @param userLoginRequest
+     * @param userLoginDTO
      * @param request
      * @return
      */
     @PostMapping("/login")
-    ResponseResult<UserLoginDTO> login(@RequestBody UserLoginDTO userLoginRequest, HttpServletRequest request) {
+    ResponseResult<UserLoginDTO> login(@RequestBody UserLoginDTO userLoginDTO, HttpServletRequest request) {
         User user = new User();
-        String userName = userLoginRequest.getUserName();
-        String password = userLoginRequest.getPassword();
+        String userName = userLoginDTO.getUserName();
+        String password = userLoginDTO.getPassword();
 
         // 获取到用户信息
         User find = userService.userLogin(userName, password, request);
 
 
         String token = JwtTokenUtils.createToken(find);
-        userLoginRequest.setToken(token);
-        userLoginRequest.setUserId(find.getUserId());
-        userLoginRequest.setPassword(null);
+        userLoginDTO.setToken(token);
+        userLoginDTO.setUserId(find.getUserId());
+        userLoginDTO.setPassword(null);
+        userLoginDTO.setIsAdmin(find.getIsAdmin());
         // 设置成功的响应
-        return ResponseResult.okResult(BusinessCode.SUCCESS, "登录成功", userLoginRequest);
+        return ResponseResult.okResult(BusinessCode.SUCCESS, "登录成功", userLoginDTO);
 
     }
 
