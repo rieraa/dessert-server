@@ -2,6 +2,7 @@ package com.example.desserts.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.desserts.domain.DTO.AddDessertDTO;
 import com.example.desserts.mapper.DessertMapper;
 import com.example.desserts.mapper.SpecificationMapper;
 import com.example.desserts.mapper.TasteMapper;
@@ -13,12 +14,14 @@ import com.example.desserts.model.vo.DessertListVO;
 import com.example.desserts.service.DessertService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * 甜品相关服务实现类
  */
+@Transactional // 如果在任何步骤中出现错误，整个操作都会回滚
 @Service
 public class DessertServiceImpl extends ServiceImpl<DessertMapper, Dessert> implements DessertService {
 
@@ -38,7 +41,6 @@ public class DessertServiceImpl extends ServiceImpl<DessertMapper, Dessert> impl
         // 查询第 pageNum 页数据，每页 pageSize 条
         Page<Dessert> page = new Page<>(pageNum, pageSize);
 
-        // todo 哪里来的this
         page = this.page(page, null);
         System.out.println("总记录数：" + page.getTotal());
         System.out.println("总共多少页：" + page.getPages());
@@ -60,7 +62,7 @@ public class DessertServiceImpl extends ServiceImpl<DessertMapper, Dessert> impl
     @Override
     public DessertDetailVO getDessertDetail(Integer dessertId) {
 
-        DessertDetailVO dessertDetailVO = new DessertDetailVO();
+        DessertDetailVO dessertDetailVO;
         dessertDetailVO = dessertMapper.selectDetailById(dessertId);
         // 查询甜品规格及口味列表
         List<Specification> specificationList = specificationMapper.selectByDessertId(dessertId);
@@ -68,6 +70,30 @@ public class DessertServiceImpl extends ServiceImpl<DessertMapper, Dessert> impl
         dessertDetailVO.setTasteList(tasteList);
         dessertDetailVO.setSpecificationList(specificationList);
         return dessertDetailVO;
+    }
+
+    @Override
+    public void addDessert(AddDessertDTO addDessertDTO) {
+        dessertMapper.insert(addDessertDTO);
+        int dessertId = addDessertDTO.getDessertId();
+
+        Specification specification = new Specification();
+        Taste taste = new Taste();
+        specification.setDessertId(dessertId);
+        specification.setSpeName(addDessertDTO.getSpeName());
+        specification.setExtra(addDessertDTO.getExtra());
+        specificationMapper.insert(specification);
+        taste.setDessertId(dessertId);
+        taste.setTasteName(addDessertDTO.getTasteName());
+        tasteMapper.insert(taste);
+
+    }
+
+    @Override
+    public void deleteDessert(Integer dessertId) {
+        dessertMapper.deleteById(dessertId);
+        specificationMapper.deleteByDessertId(dessertId);
+        tasteMapper.deleteByDessertId(dessertId);
     }
 
 

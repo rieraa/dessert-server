@@ -2,6 +2,7 @@ package com.example.desserts.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.desserts.model.entity.Specification;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -20,4 +21,6 @@ public interface SpecificationMapper extends BaseMapper<Specification> {
     List<Specification> selectByDessertId(@Param("dessertId") int dessertId);
 
 
+    @Delete("DELETE FROM specification WHERE dessert_id = #{dessertId}")
+    int deleteByDessertId(@Param("dessertId") int dessertId);
 }
