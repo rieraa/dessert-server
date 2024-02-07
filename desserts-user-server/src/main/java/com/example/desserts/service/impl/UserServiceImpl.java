@@ -1,12 +1,12 @@
 package com.example.desserts.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.desserts.model.entity.User;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.desserts.enums.BusinessCode;
 import com.example.desserts.exception.BusinessException;
 import com.example.desserts.mapper.UserMapper;
+import com.example.desserts.model.entity.User;
 import com.example.desserts.service.UserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -117,5 +118,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         queryWrapper.eq("user_id", user.getUserId());
 
         return userMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public List<User> allUser() {
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("is_admin", 0);  // 假设在数据库中，0 表示 false，即非管理员用户
+        return userMapper.selectList(queryWrapper);
     }
 }

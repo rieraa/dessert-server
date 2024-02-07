@@ -1,10 +1,10 @@
 package com.example.desserts.controller;
 
-import com.example.desserts.domain.ResponseResult;
 import com.example.desserts.domain.DTO.UserLoginDTO;
 import com.example.desserts.domain.DTO.UserRegisterDTO;
-import com.example.desserts.model.entity.User;
+import com.example.desserts.domain.ResponseResult;
 import com.example.desserts.enums.BusinessCode;
+import com.example.desserts.model.entity.User;
 import com.example.desserts.service.UserService;
 import com.example.desserts.utils.JwtTokenUtils;
 import jakarta.annotation.Resource;
@@ -69,6 +69,19 @@ public class UserController {
         int userId = (int) request.getAttribute("userId");
 
         return 200;
+    }
 
+
+    @GetMapping("/allUser")
+    public ResponseResult allUser() {
+        return ResponseResult.okResult(userService.allUser());
+    }
+
+    @PostMapping("/deleteUser")
+    public ResponseResult deleteUser(@RequestBody User user) {
+
+
+        userService.removeById(user.getUserId());
+        return ResponseResult.okResult();
     }
 }
