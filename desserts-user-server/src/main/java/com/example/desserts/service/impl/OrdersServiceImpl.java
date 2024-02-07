@@ -35,8 +35,31 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     @Resource
     private CartMapper cartMapper;
 
+    /**
+     * @Description: 购物车中下单
+     */
     @Override
     public void createOrderAndClearCart(CreateOrderDTO createOrderDTO) {
+        // 从购物车中删除已经下单的商品
+        for (Cart cartItem : createOrderDTO.getCartItems()) {
+            cartMapper.deleteById(cartItem.getCartId());
+        }
+    }
+
+    /**
+     * @param createOrderDTO
+     * @Description: 商品详情中下单
+     */
+    @Override
+    public void createOrder(CreateOrderDTO createOrderDTO) {
+        createOrderFromCartItems(createOrderDTO);
+    }
+
+    /**
+     * @param createOrderDTO
+     * @Description: 公共方法，创建订单
+     */
+    private void createOrderFromCartItems(CreateOrderDTO createOrderDTO) {
         Orders orders = new Orders();
         // 所有购物车中被选中的商品
         List<Cart> cartItems = createOrderDTO.getCartItems();
@@ -67,11 +90,12 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
             orderDetail.setSpeId(cartItem.getSpeId());
             orderDetail.setTasteId(cartItem.getTasteId());
             orderdetailetMapper.insert(orderDetail);
-
-            // 从购物车中删除已经下单的商品
-            cartMapper.deleteById(cartItem.getCartId());
         }
 
+    }
 
+    @Override
+    public List<Orders> selectOrderList(int userId) {
+        return ordersMapper.selectOrderList(userId);
     }
 }
