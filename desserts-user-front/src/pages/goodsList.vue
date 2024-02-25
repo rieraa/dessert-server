@@ -4,7 +4,7 @@
       <t-button @click="visible = true">增加甜品</t-button>
     </t-card>
     <t-card>
-      <t-table row-key="id" :loading="isLoading" :data="list" :columns="columns" :row-class-name="getRowClassName">
+      <t-table row-key="id" :loading="isLoading" :data="list" :columns="columns">
         <template #operation="{ row }">
           <t-popconfirm @confirm="handleDelete(row)" content="确认删除吗">
             <t-link theme="danger">删除</t-link>
@@ -32,15 +32,33 @@
         </t-form-item>
 
         <t-form-item label="甜品图片" name="dessertImg">
-          <t-upload theme="image" accept="image/*" @success="ondessertImg" :action="actionURL" />
+          <t-upload
+            :sizeLimit="{ size: 1, unit: 'MB', message: '图片大小不超过1MB' }"
+            theme="image"
+            accept="image/*"
+            @success="ondessertImg"
+            :action="actionURL"
+          />
         </t-form-item>
 
         <t-form-item label="甜品价格" name="dessertPrice">
-          <t-input v-model="formData.dessertPrice" placeholder="请输入甜品价格"></t-input>
+          <t-input
+            :sizeLimit="{ size: 1, unit: 'MB', message: '图片大小不超过1MB' }"
+            v-model="formData.dessertPrice"
+            placeholder="请输入甜品价格"
+          ></t-input>
         </t-form-item>
 
         <t-form-item label="甜品长图" name="detailImg">
           <t-upload theme="image" accept="image/*" @success="ondetailImg" :action="actionURL" />
+        </t-form-item>
+
+        <t-form-item label="规格" name="speName">
+          <t-input v-model="formData.speName" placeholder="请输入甜品保质期时间"></t-input>
+        </t-form-item>
+
+        <t-form-item label="口味" name="tasteName">
+          <t-input v-model="formData.tasteName" placeholder="请输入甜品保质期时间"></t-input>
         </t-form-item>
 
         <t-form-item label="保质期" name="shelfLife">
@@ -64,8 +82,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { dessertListService, addService } from '@/apis/dessert';
 import { MessagePlugin } from 'tdesign-vue-next';
+
+import { dessertListService, addService, deleteService } from '@/apis/dessert';
 
 const actionURL = `http://localhost:9898/api/file/upload`;
 
@@ -134,6 +153,8 @@ const rules = {
   dessertPrice: [{ required: true }],
   shelfLife: [{ required: true }],
   storageMethod: [{ required: true }],
+  speName: [{ required: true }],
+  tasteName: [{ required: true }],
 };
 
 const formData = ref({
@@ -143,12 +164,14 @@ const formData = ref({
   dessertPrice: '',
   detailImg: '',
   shelfLife: '',
+  speName: '',
+  tasteName: '',
   storageMethod: '',
 });
 
 const handleDelete = async row => {
   await deleteService(row.dessertId);
-  load(currentPage);
+  await load(currentPage);
   MessagePlugin.success('删除成功');
 };
 
@@ -173,9 +196,10 @@ const onReset = () => {
 };
 
 const onSubmit = async ({ validateResult, firstError }) => {
+  console.log(formData.value);
   if (validateResult === true) {
     MessagePlugin.success('提交成功');
-    await addService(formData);
+    await addService(formData.value);
     visible.value = false;
   } else {
     console.log('Errors: ', validateResult);
@@ -190,12 +214,12 @@ const handlePageChange = async newPage => {
 
 const ondetailImg = ({ response }) => {
   console.log(response);
-  formData.detailImg = response.url;
+  formData.value.detailImg = response.data.url;
 };
 
 const ondessertImg = ({ response }) => {
   console.log(response);
-  formData.dessertImg = response.url;
+  formData.value.dessertImg = response.data.url;
 };
 
 onMounted(() => {

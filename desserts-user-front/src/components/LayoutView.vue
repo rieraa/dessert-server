@@ -17,14 +17,14 @@
       </t-header>
       <t-layout>
         <t-aside style="border-top: 1px solid var(--component-border)">
-          <t-menu theme="light" value="dashboard" style="margin-right: 50px" height="550px">
-            <t-menu-item value="dashboard">
+          <t-menu theme="light" :value="current" style="margin-right: 50px" height="550px">
+            <t-menu-item @click="onNavClick('/', 'dashboard')" value="dashboard">
               <template #icon>
-                <t-icon name="dashboard" />
+                <t-icon name="server" />
               </template>
               甜品列表
             </t-menu-item>
-            <t-menu-item value="resource">
+            <t-menu-item @click="onNavClick('/user', 'resource')" value="resource">
               <template #icon>
                 <t-icon name="server" />
               </template>
@@ -42,11 +42,19 @@
 
 <script setup>
 import { clearToken } from '@/utils/auth.js';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import logoSrc from '@/assets/logo.png';
 
 const router = useRouter();
+const current = ref('dashboard');
 const userName = localStorage.getItem('userName');
+
+const onNavClick = (url, value) => {
+  router.push(url);
+  current.value = value;
+};
+
 const onClick = () => {
   clearToken();
   router.push('/login');
