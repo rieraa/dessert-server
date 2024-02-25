@@ -2,6 +2,7 @@ package com.example.desserts.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.desserts.domain.DTO.UserListDTO;
 import com.example.desserts.enums.BusinessCode;
 import com.example.desserts.exception.BusinessException;
 import com.example.desserts.mapper.UserMapper;
@@ -121,10 +122,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public List<User> allUser() {
-
+    public UserListDTO allUser() {
+        UserListDTO userListDTO = new UserListDTO();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("is_admin", 0);  // 假设在数据库中，0 表示 false，即非管理员用户
-        return userMapper.selectList(queryWrapper);
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userListDTO.setUserList(userList);
+        userListDTO.setTotal(userList.size());
+        return userListDTO;
     }
 }
