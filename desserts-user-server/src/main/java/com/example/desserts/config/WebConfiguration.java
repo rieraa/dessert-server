@@ -31,7 +31,7 @@ public class WebConfiguration implements WebMvcConfigurer {
                 .allowedOriginPatterns("*") // 支持域
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // 支持方法
                 .allowedHeaders("*")
-                .exposedHeaders("*");
+                .allowedOrigins("*");
     }
 
 }
