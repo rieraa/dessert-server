@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Web配置类，用于配置拦截器等Web相关设置。
  */
 @Configuration
+@EnableWebMvc
 public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -29,9 +31,10 @@ public class WebConfiguration implements WebMvcConfigurer {
         registry.addMapping("/**") // 所有接口
                 .allowCredentials(true) // 是否发送 Cookie
                 .allowedOriginPatterns("*") // 支持域
+                //.allowedOrigins("http://localhost:5173")
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // 支持方法
                 .allowedHeaders("*")
-                .allowedOrigins("*");
+                .exposedHeaders("*");
     }
 
 }

@@ -10,7 +10,8 @@ public class AllowedPaths {
             "/user/login",
             "/user/register",
             "/dessert/getAllDessert",
-            "/dessert/getDessertById"
+            "/dessert/getDessertById",
+            "/file/upload"
     ));
 
 }
