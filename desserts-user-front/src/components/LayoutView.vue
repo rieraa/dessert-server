@@ -4,7 +4,10 @@
       <t-header>
         <t-head-menu value="item1" height="120px">
           <template #logo>
-            <img width="136" class="logo" src="https://www.tencent.com/img/index/menu_logo_hover.png" alt="logo" />
+            <div style="width: 60px; height: 50px">
+              <img style="width: 100%; height: 100%" class="logo" :src="logoSrc" alt="logo" />
+            </div>
+            <p style="line-height: 50px; font-size: 20px; color: rgba(26, 26, 26, 0.864)">甜品管理后台</p>
           </template>
           <template #operations>
             <p>{{ userName || '用户名' }}</p>
@@ -29,10 +32,8 @@
             </t-menu-item>
           </t-menu>
         </t-aside>
-        <t-layout>
-          <t-content>
-            <router-view></router-view>
-          </t-content>
+        <t-layout style="min-height: calc(100vh - 56px); padding: 6px">
+          <router-view></router-view>
         </t-layout>
       </t-layout>
     </t-layout>
@@ -42,6 +43,7 @@
 <script setup>
 import { clearToken } from '@/utils/auth.js';
 import { useRouter } from 'vue-router';
+import logoSrc from '@/assets/logo.png';
 
 const router = useRouter();
 const userName = localStorage.getItem('userName');
