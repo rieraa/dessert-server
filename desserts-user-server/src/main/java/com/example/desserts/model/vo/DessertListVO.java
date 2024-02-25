@@ -16,6 +16,12 @@ public class DessertListVO implements Serializable {
      */
     private List<Dessert> desserts;
 
+
+    /**
+     * 甜品总数
+     */
+    private long total;
+
     /**
      * 是否还有更多数据
      */

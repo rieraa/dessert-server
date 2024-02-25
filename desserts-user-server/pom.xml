@@ -66,6 +66,22 @@
             <version>3.8.2</version>
         </dependency>
 
+        <!-- OSS依赖-->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.10.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+
+
+
 
     </dependencies>
 

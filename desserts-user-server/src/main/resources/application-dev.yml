@@ -12,3 +12,10 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+aliyun:
+  oss:
+    end-point: oss-cn-fuzhou.aliyuncs.com
+    access-key-id: LTAI5tRGPZyPfwod45Ry6G7F
+    access-key-secret: DXdzUKAKQml1z4ODTQOfvQkraMOrWt
+    bucket-name: oooooo

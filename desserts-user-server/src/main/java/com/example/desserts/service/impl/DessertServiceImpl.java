@@ -52,6 +52,7 @@ public class DessertServiceImpl extends ServiceImpl<DessertMapper, Dessert> impl
 
         // 将查询结果设置到 DessertListVO 对象中
         result.setDesserts(list);
+        result.setTotal(page.getTotal());
 
         // 判断是否还有更多数据
         result.setHasMoreData(page.hasNext());

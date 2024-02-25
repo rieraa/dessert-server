@@ -36,7 +36,11 @@ public enum BusinessCode {
 
 
     // 订单相关响应码
-    ORDER_NOT_FOUND(6001, "该用户还没有订单");
+    ORDER_NOT_FOUND(6001, "该用户还没有订单"),
+
+
+    // 文件上传相关响应码
+    FILE_UPLOAD_ERROR(7001, "文件上传失败");
 
 
 
