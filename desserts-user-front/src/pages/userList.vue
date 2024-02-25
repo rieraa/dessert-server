@@ -14,6 +14,15 @@
           </t-popconfirm>
         </template>
       </t-table>
+      <t-pagination
+        style="margin-top: 10px"
+        @current-change="handlePageChange"
+        :total="total"
+        :showPageSize="false"
+        :pageSize="15"
+        showPageNumber
+        showPreviousAndNextBtn
+      />
     </t-card>
   </div>
 </template>
@@ -55,6 +64,7 @@ const columns = ref([
 ]);
 const isLoading = ref(false);
 const list = ref([]);
+const total = ref(0);
 
 const handleDelete = async row => {
   await deleteService(row.userId);
@@ -64,7 +74,9 @@ const handleDelete = async row => {
 
 const load = async () => {
   isLoading.value = true;
-  list.value = await allUserService();
+  const { userList, total: totalValue } = await allUserService();
+  list.value = userList;
+  total.value = totalValue;
   isLoading.value = false;
 };
 
