@@ -40,8 +40,12 @@
 <script setup>
 import { loginService } from '@/apis/user.js';
 import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
 import { MessagePlugin } from 'tdesign-vue-next';
+import { setToken } from '@/utils/auth';
 import { DesktopIcon, LockOnIcon } from 'tdesign-icons-vue-next';
+
+const router = useRouter();
 
 const formData = reactive({
   userName: '',
@@ -61,10 +65,16 @@ const onSubmit = async ({ validateResult, firstError }) => {
   if (validateResult === true) {
     const res = await loginService({ ...formData });
     console.log(res);
-    MessagePlugin.success('提交成功');
+    if (res.isAdmin !== 1) {
+      MessagePlugin.warning('登录失败，权限不足');
+    } else {
+      MessagePlugin.success('登录成功');
+      setToken(res.token);
+      localStorage.setItem('userName', res.userName);
+      router.push('/');
+    }
   } else {
     console.log('Validate Errors: ', firstError, validateResult);
-    MessagePlugin.warning(firstError);
   }
 };
 </script>

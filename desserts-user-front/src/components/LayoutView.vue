@@ -7,8 +7,8 @@
             <img width="136" class="logo" src="https://www.tencent.com/img/index/menu_logo_hover.png" alt="logo" />
           </template>
           <template #operations>
-            <p>用户名</p>
-            <t-button theme="primary" variant="text">退出</t-button>
+            <p>{{ userName || '用户名' }}</p>
+            <t-button theme="primary" @click="onClick" variant="text">退出</t-button>
           </template>
         </t-head-menu>
       </t-header>
@@ -39,7 +39,17 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { clearToken } from '@/utils/auth.js';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const userName = localStorage.getItem('userName');
+const onClick = () => {
+  clearToken();
+  router.push('/login');
+};
+</script>
 
 <style lang="scss" scoped>
 .main-layout {
