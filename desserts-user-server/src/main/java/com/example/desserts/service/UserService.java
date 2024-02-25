@@ -1,10 +1,9 @@
 package com.example.desserts.service;
 
-import com.example.desserts.model.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.desserts.domain.DTO.UserListDTO;
+import com.example.desserts.model.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
-
-import java.util.List;
 
 /**
  * 用户模块服务
@@ -27,6 +26,6 @@ public interface UserService extends IService<User> {
     User userRegister(String userName, String password, String checkPassword);
 
 
-    List<User> allUser();
+    UserListDTO allUser();
 
 }

@@ -1,5 +1,6 @@
 package com.example.desserts.controller;
 
+import com.example.desserts.domain.DTO.UserListDTO;
 import com.example.desserts.domain.DTO.UserLoginDTO;
 import com.example.desserts.domain.DTO.UserRegisterDTO;
 import com.example.desserts.domain.ResponseResult;
@@ -10,6 +11,8 @@ import com.example.desserts.utils.JwtTokenUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 用户模块
@@ -74,7 +77,8 @@ public class UserController {
 
     @GetMapping("/allUser")
     public ResponseResult allUser() {
-        return ResponseResult.okResult(userService.allUser());
+        UserListDTO userListDTO= userService.allUser();
+        return ResponseResult.okResult(userListDTO);
     }
 
     @PostMapping("/deleteUser")
