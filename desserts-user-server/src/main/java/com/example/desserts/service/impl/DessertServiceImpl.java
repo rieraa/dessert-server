@@ -75,18 +75,24 @@ public class DessertServiceImpl extends ServiceImpl<DessertMapper, Dessert> impl
 
     @Override
     public void addDessert(AddDessertDTO addDessertDTO) {
-        dessertMapper.insert(addDessertDTO);
-        int dessertId = addDessertDTO.getDessertId();
+        dessertMapper.insert(addDessertDTO); // 插入甜品基本信息，包括extra字段
+        int dessertId = addDessertDTO.getDessertId(); // 获取插入后的甜品ID
 
-        Specification specification = new Specification();
-        Taste taste = new Taste();
-        specification.setDessertId(dessertId);
-        specification.setSpeName(addDessertDTO.getSpeName());
-        specification.setExtra(addDessertDTO.getExtra());
-        specificationMapper.insert(specification);
-        taste.setDessertId(dessertId);
-        taste.setTasteName(addDessertDTO.getTasteName());
-        tasteMapper.insert(taste);
+        // 处理每个规格名称
+        for (String speName : addDessertDTO.getSpeName()) {
+            Specification specification = new Specification();
+            specification.setDessertId(dessertId);
+            specification.setSpeName(speName);
+            specificationMapper.insert(specification); // 插入规格信息
+        }
+
+        // 处理每个口味
+        for (String tasteName : addDessertDTO.getTasteName()) {
+            Taste taste = new Taste();
+            taste.setDessertId(dessertId);
+            taste.setTasteName(tasteName);
+            tasteMapper.insert(taste); // 插入口味信息
+        }
 
     }
 
