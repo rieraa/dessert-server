@@ -68,7 +68,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User userRegister(String userName, String password, String checkPassword) {
+    public User userRegister(String userName, String password, String checkPassword,int userSex) {
         // 1.校验
         if (StringUtils.isAnyBlank(userName, password, checkPassword)) {
             throw new BusinessException("参数错误", BusinessCode.PARAMS_ERROR.getCode(), "用户名、密码不能为空");
@@ -109,6 +109,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User user = new User();
         user.setUserName(userName);
         user.setPassword(encryptPassword);
+        user.setUserSex(userSex);
 
 
         int saveResult = userMapper.insert(user);

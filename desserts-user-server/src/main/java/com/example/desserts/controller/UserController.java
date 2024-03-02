@@ -32,8 +32,9 @@ public class UserController {
         String userName = userRegisterRequest.getUserName();
         String password = userRegisterRequest.getPassword();
         String checkPassword = userRegisterRequest.getCheckPassword();
+        int userSex = userRegisterRequest.getUserSex();
 
-        User user = userService.userRegister(userName, password, checkPassword);
+        User user = userService.userRegister(userName, password, checkPassword,userSex);
         user.setPassword(null);
 
         return ResponseResult.okResult(BusinessCode.SUCCESS, "注册成功", user);

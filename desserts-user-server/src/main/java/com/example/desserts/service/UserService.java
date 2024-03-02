@@ -23,7 +23,7 @@ public interface UserService extends IService<User> {
      * @param checkPassword -确认密码
      * @return 新用户id
      */
-    User userRegister(String userName, String password, String checkPassword);
+    User userRegister(String userName, String password, String checkPassword,int userSex);
 
 
     UserListDTO allUser();
