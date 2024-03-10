@@ -14,4 +14,6 @@ public class UserRegisterDTO {
 
     private String checkPassword;
 
+    private int userSex;
+
 }

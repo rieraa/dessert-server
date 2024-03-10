@@ -10,15 +10,25 @@
             <t-link theme="danger">删除</t-link>
           </t-popconfirm>
         </template>
+        <template #dessertImg="{ row }">
+          <div style="width: 80px;height: 80px">
+            <img style="height: 100%;width: 100%" :src="row.dessertImg"/>
+          </div>
+        </template>
+        <template #detailImg="{ row }">
+          <div style="width: 80px;height: 80px">
+            <img style="height: 100%;width: 100%" :src="row.detailImg"/>
+          </div>
+        </template>
       </t-table>
       <t-pagination
-        style="margin-top: 10px"
-        @current-change="handlePageChange"
-        :total="total"
-        :showPageSize="false"
-        :pageSize="15"
-        showPageNumber
-        showPreviousAndNextBtn
+          style="margin-top: 10px"
+          @current-change="handlePageChange"
+          :total="total"
+          :showPageSize="false"
+          :pageSize="15"
+          showPageNumber
+          showPreviousAndNextBtn
       />
     </t-card>
     <t-dialog v-model:visible="visible" header="新增甜品" width="40%" :on-close="onReset" :footer="false">
@@ -33,24 +43,24 @@
 
         <t-form-item label="甜品图片" name="dessertImg">
           <t-upload
-            :sizeLimit="{ size: 1, unit: 'MB', message: '图片大小不超过1MB' }"
-            theme="image"
-            accept="image/*"
-            @success="ondessertImg"
-            :action="actionURL"
+              :sizeLimit="{ size: 1, unit: 'MB', message: '图片大小不超过1MB' }"
+              theme="image"
+              accept="image/*"
+              @success="ondessertImg"
+              :action="actionURL"
           />
         </t-form-item>
 
         <t-form-item label="甜品价格" name="dessertPrice">
           <t-input
-            :sizeLimit="{ size: 1, unit: 'MB', message: '图片大小不超过1MB' }"
-            v-model="formData.dessertPrice"
-            placeholder="请输入甜品价格"
+              :sizeLimit="{ size: 1, unit: 'MB', message: '图片大小不超过1MB' }"
+              v-model="formData.dessertPrice"
+              placeholder="请输入甜品价格"
           ></t-input>
         </t-form-item>
 
         <t-form-item label="甜品长图" name="detailImg">
-          <t-upload theme="image" accept="image/*" @success="ondetailImg" :action="actionURL" />
+          <t-upload theme="image" accept="image/*" @success="ondetailImg" :action="actionURL"/>
         </t-form-item>
 
         <t-form-item label="规格" name="speName">
@@ -81,10 +91,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
+import {ref, onMounted} from 'vue';
+import {MessagePlugin} from 'tdesign-vue-next';
 
-import { dessertListService, addService, deleteService } from '@/apis/dessert';
+import {dessertListService, addService, deleteService} from '@/apis/dessert';
 
 const actionURL = `http://localhost:9898/api/file/upload`;
 
@@ -93,7 +103,7 @@ const columns = ref([
     colKey: 'dessertId',
     title: 'id',
     cell: 'dessertId',
-    width: 30,
+    width: 50,
   },
   {
     colKey: 'dessertName',
@@ -119,6 +129,7 @@ const columns = ref([
   {
     colKey: 'detailImg',
     title: '甜品长图',
+    cell: 'detailImg',
     width: 100,
   },
   {
@@ -145,16 +156,16 @@ const total = ref(0);
 const visible = ref(false);
 
 const rules = {
-  dessertName: [{ required: true }, { min: 2 }, { max: 10, type: 'warning' }],
-  dessertExplain: [{ validator: val => val.length < 20, message: '不能超过 20 个字，中文长度等于英文长度' }],
-  dessertImg: [{ required: true }],
-  dessertPrice: [{ required: true }],
-  detailImg: [{ required: true }],
-  dessertPrice: [{ required: true }],
-  shelfLife: [{ required: true }],
-  storageMethod: [{ required: true }],
-  speName: [{ required: true }],
-  tasteName: [{ required: true }],
+  dessertName: [{required: true}, {min: 2}, {max: 10, type: 'warning'}],
+  dessertExplain: [{validator: val => val.length < 20, message: '不能超过 20 个字，中文长度等于英文长度'}],
+  dessertImg: [{required: true}],
+  dessertPrice: [{required: true}],
+  detailImg: [{required: true}],
+  dessertPrice: [{required: true}],
+  shelfLife: [{required: true}],
+  storageMethod: [{required: true}],
+  speName: [{required: true}],
+  tasteName: [{required: true}],
 };
 
 const formData = ref({
@@ -177,7 +188,7 @@ const handleDelete = async row => {
 
 const load = async (currentPage = 1) => {
   isLoading.value = true;
-  const { desserts, total: totalValue } = await dessertListService(currentPage);
+  const {desserts, total: totalValue} = await dessertListService(currentPage);
   list.value = desserts;
   total.value = totalValue;
   isLoading.value = false;
@@ -195,7 +206,7 @@ const onReset = () => {
   };
 };
 
-const onSubmit = async ({ validateResult, firstError }) => {
+const onSubmit = async ({validateResult, firstError}) => {
   console.log(formData.value);
   if (validateResult === true) {
     MessagePlugin.success('提交成功');
@@ -212,12 +223,12 @@ const handlePageChange = async newPage => {
   load(currentPage.value);
 };
 
-const ondetailImg = ({ response }) => {
+const ondetailImg = ({response}) => {
   console.log(response);
   formData.value.detailImg = response.data.url;
 };
 
-const ondessertImg = ({ response }) => {
+const ondessertImg = ({response}) => {
   console.log(response);
   formData.value.dessertImg = response.data.url;
 };
