@@ -171,7 +171,7 @@ const formData = ref({
 
 const handleDelete = async row => {
   await deleteService(row.dessertId);
-  await load(currentPage);
+  await load(currentPage.value);
   MessagePlugin.success('删除成功');
 };
 
